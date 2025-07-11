@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的响应式网页</title>
+    <title>我的响应式网页 (终极诊断版)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,21 +15,17 @@
     <main>
         <section class="text-section">
             <h2>关于我们</h2>
-            <p>我们致力于提供高质量的信息和内容。无论您是使用电脑、平板还是手机访问，我们都希望您能获得最佳的浏览体验。</p>
-            <p>这个网页是为了演示如何使用HTML和CSS创建一个在不同设备上都能良好显示的页面。</p>
+            <p>我们致力于提供高质量的信息和内容。</p>
         </section>
-
         <section class="image-section">
             <h2>精选图片</h2>
             <div class="image-gallery">
-                <img src="微信图片_20240327102309.png" alt="图片1：你的自定义图片">
-                <img src="微信图片_20240327102309.png" alt="图片2：你的自定义图片">
-                <img src="微信图片_20240327102309.png" alt="图片3：你的自定义图片">
+                <img src="微信图片_20240327102309.png" alt="图片1">
             </div>
         </section>
 
         <section class="datawrapper-table-section">
-            <h2>可筛选数据表格 (最终修正版)</h2>
+            <h2>可筛选数据表格</h2>
             <p>点击下面的按钮，可以直接筛选表格中的数据。</p>
             
             <style>
@@ -47,84 +43,62 @@
             </div>
             
             <div id="datawrapper-vis-oXdYf" style="width: 100%; min-height: 500px;">
-                </div>
-            
-            <script type="text/javascript">
-                // 1. 首先，动态加载 Datawrapper 的 embed.js 脚本
-                (function() {
-                    var dwScript = document.createElement('script');
-                    dwScript.type = 'text/javascript';
-                    dwScript.defer = true;
-                    dwScript.src = 'https://datawrapper.dwcdn.net/oXdYf/embed.js';
-                    dwScript.charset = 'utf-8';
-                    document.getElementById('datawrapper-vis-oXdYf').appendChild(dwScript);
-                })();
-
-                // 2. 定义我们的筛选函数
-                function filterTable(category) {
-                    var container = document.getElementById('datawrapper-vis-oXdYf');
-                    var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/3/';
-                    var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
-
-                    // 3. 这是核心：创建一个“检查器”来等待 iframe 加载
-                    var attempts = 0; // 尝试次数计数器
-                    var maxAttempts = 50; // 最多尝试50次 (5秒)
-                    
-                    var checker = setInterval(function() {
-                        var iframe = container.querySelector('iframe');
-                        attempts++;
-
-                        // 如果找到了 iframe
-                        if (iframe) {
-                            clearInterval(checker); // 停止检查
-                            if (iframe.src !== newSrc) {
-                                iframe.src = newSrc; // 执行筛选
-                            }
-                        } 
-                        // 如果超过最大尝试次数还没找到
-                        else if (attempts > maxAttempts) {
-                            clearInterval(checker); // 停止检查
-                            alert('错误：加载表格超时，请刷新页面重试。');
-                            console.error('Datawrapper iframe 加载超时。');
-                        }
-                        // 否则，继续等待...
-                    }, 100); // 每 100 毫秒检查一次
-                }
-            </script>
+                <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/oXdYf/embed.js" charset="utf-8"></script>
+            </div>
         </section>
         <section class="table-section">
             <h2>数据表格</h2>
             <table>
-                <thead>
-                    <tr>
-                        <th>项目</th>
-                        <th>描述</th>
-                        <th>状态</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>项目A</td>
-                        <td>这是一个重要的项目。</td>
-                        <td>完成</td>
-                    </tr>
-                    <tr>
-                        <td>项目B</td>
-                        <td>需要进一步的工作。</td>
-                        <td>进行中</td>
-                    </tr>
-                    <tr>
-                        <td>项目C</td>
-                        <td>计划在下个月启动。</td>
-                        <td>待开始</td>
-                    </tr>
-                </tbody>
-            </table>
+                </table>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 我的响应式网页. 保留所有权利。</p>
     </footer>
+
+    <script type="text/javascript">
+        // 定义我们的筛选函数，并将其附加到全局 window 对象上，以确保 onclick 可以找到它
+        window.filterTable = function(category) {
+            
+            // 日志1：记录按钮点击事件
+            console.log("按钮被点击，准备筛选分类:", category || "显示全部");
+
+            var container = document.getElementById('datawrapper-vis-oXdYf');
+            var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/3/';
+            var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
+
+            var attempts = 0;
+            var maxAttempts = 50; 
+            
+            // 日志2：开始检查 iframe 是否存在
+            console.log("开始循环检查 iframe...");
+
+            var checker = setInterval(function() {
+                var iframe = container.querySelector('iframe');
+                attempts++;
+
+                if (iframe) {
+                    // 日志3：成功找到 iframe
+                    console.log("第 " + attempts + " 次尝试：成功找到 iframe！");
+                    clearInterval(checker); // 停止检查
+
+                    if (iframe.src !== newSrc) {
+                        // 日志4：准备更新 iframe 链接
+                        console.log("准备更新 iframe 链接为:", newSrc);
+                        iframe.src = newSrc; // 执行筛选
+                    } else {
+                        console.log("链接已经是最新，无需更新。");
+                    }
+                } 
+                else if (attempts > maxAttempts) {
+                    // 日志5：超时错误
+                    console.error("错误：加载表格超时！");
+                    clearInterval(checker); // 停止检查
+                    alert('错误：加载表格超时，请刷新页面重试。');
+                }
+            }, 100);
+        }
+    </script>
 </body>
 </html>
