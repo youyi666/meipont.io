@@ -3,6 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的响应式网页 (最终版)</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .filter-buttons { margin-bottom: 15px; font-family: Arial, sans-serif; display: flex; flex-wrap: wrap; gap: 10px; }
+        .filter-btn { display: inline-block; padding: 8px 16px; font-size: 14px; color: #fff; background-color: #007bff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; }
+        .filter-btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>欢迎来到我的网页</h1>
+        <p>这是一个展示响应式设计的示例页面。</p>
+    </header>
+
+    <main>
+        <section class="text-section">
+            <h2>关于我们</h2>
+            <p>我们致力于提供高质量的信息和内容。</p>
+        </section>
+        <section class="image-section">
+            <h2>精选图片</h2>
+            <div class="image-gallery">
+                <img src="微信图片_20240327102309.png" alt="图片1">
+            </div>
+        </section>
+
+        <section class="datawrapper-table-section">
+            <h2>可筛选数据表格</h2>
+            <p>点击下面的按钮，可以直接筛选表格中的数据。</p>
+            
+            <div class="filter-buttons">
+                <strong>按分类筛选: </strong>
+                <button class="filter-btn" onclick="filterTable('厨卫')">厨卫</button>
+                <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
+                <button class="filter-btn" onclick="filterTable('洗衣机')">洗衣机</button>
+                <button class="filter-btn" onclick="filterTable('')">显示全部</button>
+            </div>
+            
+            <iframe 
+                title="可筛选数据表格" 
+                aria-label="表格" 
+                id="datawrapper-chart-oXdYf" 
+                src="https://datawrapper.dwcdn.net/oXdYf/3/" 
+                scrolling="no" 
+                frameborder="0" 
+                style="width: 100%; border: none; min-height: 500px;"
+                height="1346">
+            </iframe>
+
+        </section>
+        <section class="table-section">
+            <h2>数据表格</h2>
+            <table>
+                </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 我的响应式网页. 保留所有权利。</p>
+    </footer>
+
+    <script type="text/javascript">
+        function filterTable(category) {
+            // 1. 直接通过ID获取已存在的 iframe
+            var iframe = document.getElementById('datawrapper-chart-oXdYf');
+
+            // 2. 如果找到了 iframe (这次一定能找到，因为它是静态的)
+            if (iframe) {
+                var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/3/';
+                var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
+                
+                // 3. 更新链接来执行筛选
+                iframe.src = newSrc;
+                console.log("成功将 iframe 链接更新为: " + newSrc);
+            } else {
+                // 这段代码理论上永远不会执行
+                console.error("致命错误：无法找到ID为 datawrapper-chart-oXdYf 的 iframe。");
+            }
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的响应式网页 (终极诊断版)</title>
     <link rel="stylesheet" href="style.css">
 </head>
