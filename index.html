@@ -45,6 +45,49 @@
             </div>
             <p>这是另一个从Datawrapper嵌入的表格，展示了更多数据。</p>
         </section>
+        <section class="datawrapper-section">
+    <h2>可筛选数据表格</h2>
+    <p>点击下面的按钮，可以筛选表格中的数据。</p>
+
+    <div class="filter-buttons">
+        <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
+        <button class="filter-btn" onclick="filterTable('厨卫')">厨卫</button>
+        <button class="filter-btn" onclick="filterTable('其他')">其他</button>
+        <button class="filter-btn" onclick="filterTable('')">显示全部</button>
+    </div>
+
+    <div id="datawrapper-vis-oXdYf" style="width: 100%; min-height: 500px;" data-external="1">
+        </div>
+
+    <script type="text/javascript">
+        // 等待 Datawrapper 表格加载完毕
+        window.addEventListener("load", function() {
+            // 加载表格内容的脚本
+            var dwScript = document.createElement('script');
+            dwScript.type = 'text/javascript';
+            dwScript.defer = true;
+            dwScript.src = 'https://datawrapper.dwcdn.net/oXdYf/embed.js';
+            dwScript.charset = 'utf-8';
+            document.getElementById('datawrapper-vis-oXdYf').appendChild(dwScript);
+        });
+
+        // 筛选函数
+        function filterTable(category) {
+            // 注意：我们在这里要获取由 embed.js 创建的 iframe
+            var iframe = document.querySelector('#datawrapper-vis-oXdYf iframe');
+            if (iframe) {
+                var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/1/'; // 这里的版本号 /1/ 很重要
+                if (category) {
+                    iframe.src = baseUrl + '?search=' + encodeURIComponent(category);
+                } else {
+                    iframe.src = baseUrl;
+                }
+            } else {
+                console.log("Datawrapper iframe 尚未加载，请稍后再试。");
+            }
+        }
+    </script>
+</section>
         <section class="table-section">
             <h2>数据表格</h2>
             <table>
