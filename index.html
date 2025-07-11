@@ -28,75 +28,53 @@
             </div>
         </section>
 
-        <section class="datawrapper-section">
-            <h2>数据可视化</h2>
-            <div style="min-height:490px" id="datawrapper-vis-AMmJd">
-                <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/AMmJd/embed.js" charset="utf-8" data-target="#datawrapper-vis-AMmJd"></script>
-                <noscript><img src="https://datawrapper.dwcdn.net/AMmJd/full.png" alt="" /></noscript>
+        <section class="datawrapper-table-section">
+            <h2>可筛选数据表格</h2>
+            <p>点击下面的按钮，可以直接筛选表格中的数据。</p>
+            
+            <style>
+                .filter-buttons {
+                    margin-bottom: 15px;
+                    font-family: Arial, sans-serif;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+                .filter-btn {
+                    display: inline-block;
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    color: #fff;
+                    background-color: #007bff; /* 按钮颜色，可修改 */
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+                .filter-btn:hover {
+                    background-color: #0056b3; /* 鼠标悬停颜色，可修改 */
+                }
+            </style>
+            
+            <div class="filter-buttons">
+                <strong>按分类筛选: </strong>
+                <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
+                <button class="filter-btn" onclick="filterTable('空调')">空调</button>
+                <button class="filter-btn" onclick="filterTable('厨卫')">厨卫</button>
+                <button class="filter-btn" onclick="filterTable('')">显示全部</button>
             </div>
-            <p>这是一个从Datawrapper嵌入的响应式数据图表，它将根据您的屏幕大小进行调整。</p>
+            
+            <iframe title="可筛选表格" aria-label="表格" id="datawrapper-chart-oXdYf" src="https://datawrapper.dwcdn.net/oXdYf/2/" scrolling="no" frameborder="0" style="border: none; width: 100%;" height="1346" data-external="1"></iframe>
+            
+            <script type="text/javascript">
+                function filterTable(category) {
+                    var iframe = document.getElementById('datawrapper-chart-oXdYf');
+                    var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/2/';
+                    var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
+                    iframe.src = newSrc;
+                }
+            </script>
         </section>
-
-        <section class="datawrapper-section">
-            <h2>更多数据详情</h2>
-            <div style="min-height:502px" id="datawrapper-vis-xreEE">
-                <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/xreEE/embed.js" charset="utf-8" data-target="#datawrapper-vis-xreEE"></script>
-                <noscript><img src="https://datawrapper.dwcdn.net/xreEE/full.png" alt="" /></noscript>
-            </div>
-            <p>这是另一个从Datawrapper嵌入的表格，展示了更多数据。</p>
-        </section>
-       <section class="datawrapper-section">
-    <h2>可筛选数据表格</h2>
-    <p>点击下面的按钮，可以筛选表格中的数据。</p>
-
-    <div class="filter-buttons">
-        <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
-        <button class="filter-btn" onclick="filterTable('厨卫')">厨卫</button>
-        <button class="filter-btn" onclick="filterTable('分类三')">分类三</button>
-        <button class="filter-btn" onclick="filterTable('')">显示全部</button>
-    </div>
-
-    <div id="datawrapper-vis-oXdYf" style="width: 100%; min-height: 500px;">
-      <script type="text/javascript" defer src="https://datawrapper.dwcdn.net/oXdYf/embed.js" charset="utf-8"></script>
-    </div>
-
-    <script type="text/javascript">
-      function filterTable(category) {
-        // 1. 定位到表格所在的容器
-        var container = document.getElementById('datawrapper-vis-oXdYf');
-        if (!container) {
-          console.error('错误：找不到 ID 为 datawrapper-vis-oXdYf 的容器。');
-          return;
-        }
-
-        // 2. 在容器内部寻找由 Datawrapper 创建的 iframe
-        //    这是最关键的一步，确保我们操作的是正确的对象
-        var iframe = container.querySelector('iframe');
-
-        // 3. 如果找到了 iframe，就修改它的 src 链接来实现筛选
-        if (iframe) {
-          var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/1/'; // 基础链接，末尾的 /1/ 是版本号
-          var newSrc = baseUrl;
-
-          if (category) {
-            // 如果传入了分类名，就附加搜索参数
-            newSrc = baseUrl + '?search=' + encodeURIComponent(category);
-          }
-          
-          // 只有当新的链接和当前链接不同时，才更新它，避免不必要的刷新
-          if (iframe.src !== newSrc) {
-            iframe.src = newSrc;
-          }
-
-        } else {
-          // 4. 如果没找到 iframe，在控制台给出提示
-          //    这通常意味着表格还没加载完，或者 embed.js 失败
-          alert('表格尚未加载完毕，请稍等片刻再试。');
-          console.warn('警告：点击筛选时，Datawrapper iframe 尚未准备就绪。');
-        }
-      }
-    </script>
-</section>
         <section class="table-section">
             <h2>数据表格</h2>
             <table>
