@@ -40,9 +40,9 @@
             
             <div class="filter-buttons">
                 <strong>按分类筛选: </strong>
-                <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
-                <button class="filter-btn" onclick="filterTable('空调')">空调</button>
-                <button class="filter-btn" onclick="filterTable('分类三')">分类三</button>
+                <button class="filter-btn" onclick="filterTable('厨卫')">分类一</button>
+                <button class="filter-btn" onclick="filterTable('冰箱')">分类二</button>
+                <button class="filter-btn" onclick="filterTable('洗衣机')">分类三</button>
                 <button class="filter-btn" onclick="filterTable('')">显示全部</button>
             </div>
             
@@ -63,7 +63,7 @@
                 // 2. 定义我们的筛选函数
                 function filterTable(category) {
                     var container = document.getElementById('datawrapper-vis-oXdYf');
-                    var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/2/';
+                    var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/3/';
                     var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
 
                     // 3. 这是核心：创建一个“检查器”来等待 iframe 加载
