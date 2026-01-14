@@ -3,86 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的响应式网页 (最终版)</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <title>个人简历 - 技术驱动型电商专家</title>
     <style>
-        .filter-buttons { margin-bottom: 15px; font-family: Arial, sans-serif; display: flex; flex-wrap: wrap; gap: 10px; }
-        .filter-btn { display: inline-block; padding: 8px 16px; font-size: 14px; color: #fff; background-color: #007bff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease; }
-        .filter-btn:hover { background-color: #0056b3; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 8px;
+        }
+
+        /* 头部与头像上传 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-info h1 {
+            margin: 0;
+            font-size: 2.2em;
+            letter-spacing: 2px;
+        }
+
+        .photo-upload {
+            width: 120px;
+            height: 150px;
+            border: 2px dashed #ccc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+
+        .photo-upload:hover {
+            border-color: var(--accent-color);
+        }
+
+        .photo-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .photo-upload span {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* 章节样式 */
+        section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 1.3em;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .header { flex-direction: column-reverse; text-align: center; }
+            .grid { grid-template-columns: 1fr; }
+            .photo-upload { margin-bottom: 20px; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我的网页</h1>
-        <p>这是一个展示响应式设计的示例页面。</p>
-    </header>
 
-    <main>
-        <section class="text-section">
-            <h2>关于我们</h2>
-            <p>我们致力于提供高质量的信息和内容。</p>
-        </section>
-        <section class="image-section">
-            <h2>精选图片</h2>
-            <div class="image-gallery">
-                <img src="微信图片_20240327102309.png" alt="图片1">
+<div class="container">
+    <div class="header">
+        <div class="header-info">
+            <h1>姓名：[请输入]</h1>
+            <p><strong>职位：</strong>电商运营高级主管 / 自动化数据专家</p >
+            <p><strong>概括：</strong>深耕电商行业，擅长利用 Python/Node.js 自动化工具解决复杂业务场景下的数据抓取、监控与分析问题。</p >
+        </div>
+        <div class="photo-upload" onclick="document.getElementById('fileInput').click()">
+            < img id="preview" src="" alt="头像预览">
+            <span id="uploadText">点击上传照片</span>
+            <input type="file" id="fileInput" hidden accept="image/*" onchange="previewImage(this)">
+        </div>
+    </div>
+
+    <section>
+        <h2>核心技能</h2>
+        <div class="grid">
+            <div>
+                <strong>技术能力：</strong>
+                <ul>
+                    <li>熟练使用 <strong>Playwright</strong> 进行全平台脚本开发（JD/PDD/淘宝）</li>
+                    <li>掌握 <strong>Node.js / Python</strong> 混合编程与项目架构</li>
+                    <li>精通 <strong>SQL (SQLite)</strong> 复杂查询与大数据量存储管理</li>
+                    <li>自动化处理：CSV/Excel 深度交互、自动化报销工具开发</li>
+                </ul>
             </div>
-        </section>
-
-        <section class="datawrapper-table-section">
-            <h2>可筛选数据表格</h2>
-            <p>点击下面的按钮，可以直接筛选表格中的数据。</p>
-            
-            <div class="filter-buttons">
-                <strong>按分类筛选: </strong>
-                <button class="filter-btn" onclick="filterTable('厨卫')">厨卫</button>
-                <button class="filter-btn" onclick="filterTable('冰箱')">冰箱</button>
-                <button class="filter-btn" onclick="filterTable('洗衣机')">洗衣机</button>
-                <button class="filter-btn" onclick="filterTable('')">显示全部</button>
+            <div>
+                <strong>业务能力：</strong>
+                <ul>
+                    <li>电商大促（双11等）全链路作战方案策划</li>
+                    <li>多维度 SKU 价格追踪与竞品降价实时监控策略</li>
+                    <li>基于 <strong>Obsidian + DataviewJS</strong> 的个人知识/业务看板构建</li>
+                </ul>
             </div>
-            
-            <iframe 
-                title="可筛选数据表格" 
-                aria-label="表格" 
-                id="datawrapper-chart-oXdYf" 
-                src="https://datawrapper.dwcdn.net/oXdYf/3/" 
-                scrolling="no" 
-                frameborder="0" 
-                style="width: 100%; border: none; min-height: 500px;"
-                height="1346">
-            </iframe>
+        </div>
+    </section>
 
-        </section>
-        <section class="table-section">
-            <h2>数据表格</h2>
-            <table>
-                </table>
-        </section>
-    </main>
+    <section>
+        <h2>项目经验</h2>
+        <div>
+            <strong>1. 全平台电商价格监控系统 (Node.js/Playwright)</strong>
+            <ul>
+                <li>自主开发跨平台爬虫，突破多维度 SKU 定位难点，实现每日 100+ 核心链接的价格追踪。</li>
+                <li>集成 SQLite 数据库，实现价格变动自动预警与数据结构化存储。</li>
+            </ul>
+        </div>
+        <div>
+            <strong>2. 交互式本地媒体中心 "Movie Wall"</strong>
+            <ul>
+                <li>基于 Node.js 构建本地影片库展示系统，支持手机端滑动交互、点赞及观看频率统计。</li>
+            </ul>
+        </div>
+        <div>
+            <strong>3. 自动化办公插件集</strong>
+            <ul>
+                <li>开发发票自动识别与汇总工具，大幅提升出差报销效率。</li>
+            </ul>
+        </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 我的响应式网页. 保留所有权利。</p>
-    </footer>
+    <section>
+        <h2>工作理念</h2>
+        <blockquote>
+            “坚持代码守恒原则：新功能必须是旧逻辑的迭代增强。追求高效自动化的同时，保持对业务逻辑的严谨掌控。拒绝‘屎山’代码，追求工具与人的深度协同。”
+        </blockquote>
+    </section>
+</div>
 
-    <script type="text/javascript">
-        function filterTable(category) {
-            // 1. 直接通过ID获取已存在的 iframe
-            var iframe = document.getElementById('datawrapper-chart-oXdYf');
-
-            // 2. 如果找到了 iframe (这次一定能找到，因为它是静态的)
-            if (iframe) {
-                var baseUrl = 'https://datawrapper.dwcdn.net/oXdYf/3/';
-                var newSrc = category ? baseUrl + '?search=' + encodeURIComponent(category) : baseUrl;
-                
-                // 3. 更新链接来执行筛选
-                iframe.src = newSrc;
-                console.log("成功将 iframe 链接更新为: " + newSrc);
-            } else {
-                // 这段代码理论上永远不会执行
-                console.error("致命错误：无法找到ID为 datawrapper-chart-oXdYf 的 iframe。");
+<script>
+    function previewImage(input) {
+        const file = input.files[0];
+        const preview = document.getElementById('preview');
+        const uploadText = document.getElementById('uploadText');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                uploadText.style.display = 'none';
             }
+            reader.readAsDataURL(file);
         }
-    </script>
+    }
+</script>
+
 </body>
 </html>
